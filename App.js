@@ -4,6 +4,7 @@ import AppLoading from 'expo-app-loading'
 import * as Font from "expo-font"
 import {Ionicons} from "@expo/vector-icons" 
 import {Asset} from "expo-asset"
+import { Image } from 'react-native';
 
 export default function App() {
   const [ready, setReady] = useState(false);
@@ -15,12 +16,15 @@ export default function App() {
   }
   const startLoading = async()=>{
     // preloading font icons
-    await Font.loadAsync(Ionicons.font)
-    await Asset.loadAsync(require("./assets/test.png"))
+    await Font.loadAsync(Ionicons.font) // 폰트 아이콘 로딩
+    await Asset.loadAsync(require("./assets/test.png")) // 로컬 에셋 로딩
+    await Image.prefetch("https://s.pstatic.net/static/www/img/uit/sp_main_dba1af.png")
     // await new Promise(resolve=> setTimeout(resolve,5000) )
   }
+
   if(!ready){
     return <AppLoading startAsync={startLoading} onFinish={onFinish} onError={console.error}/>;
   }
+
   return null;
 }
