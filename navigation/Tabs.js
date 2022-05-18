@@ -9,14 +9,26 @@ import Search from '../screens/Search'
 const Tab = createBottomTabNavigator()
 
 const Tabs = () => {
-const isDark = useColorScheme();
-// command + shift + a 
-console.log(isDark)
-return (<Tab.Navigator initialRouteName="Search">
-    <Tab.Screen name="Movies" component={Movies} />
-    <Tab.Screen name="Tv" component={Tv} />
-    <Tab.Screen name="Search" component={Search} />
-</Tab.Navigator>)
+const isDark = useColorScheme() === "dark";
+
+return (
+    <Tab.Navigator initialRouteName="Search" screenOptions={{
+        tabBarStyle:{
+            backgroundColor:isDark?"#1e272e":"#34e7e4"
+        },
+        tabBarActiveTintColor: isDark?"#ffc048":"#485460",
+        headerStyle:{
+            backgroundColor:isDark?"#1e272e":"#34e7e4"
+        },
+        headerTitleStyle:{
+            color:isDark?"white":"#1e272e"
+        }
+    }}>
+        <Tab.Screen name="Movies" component={Movies} />
+        <Tab.Screen name="Tv" component={Tv} />
+        <Tab.Screen name="Search" component={Search} />
+    </Tab.Navigator>
+    )
 }
 
 export default Tabs
