@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, Text, Image} from "react-native"
+import { Dimensions, Text, Image, StyleSheet, useColorScheme} from "react-native"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
@@ -34,6 +34,7 @@ const Title = styled.Text``
 const { height: SCREEN_HEIGHT } =  Dimensions.get("window")  
 
 const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
+    const isDark = useColorScheme() === "dark";
     const [loading, setLoading] = useState(true);
     const [nowPlaying, setNowPlaying] = useState([])
     const getNowPlaying = async () =>{
@@ -50,11 +51,11 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
         <ActivityIndicator size="large"/>
         </Loader>) : (
         <ScrollView>
-            <Swiper loop timeout={3.5} controlsEnabled={false} containerStyle={{width:"100%", height: SCREEN_HEIGHT /  4 }}>
+            <Swiper horizontal loop showsButtons={false} autoplayTimeout={3.5} showsPagination={false} containerStyle={{width:"100%", height: SCREEN_HEIGHT /  4 }}>
                 {nowPlaying.map( (movie) =>
                     (<View key={movie.id} >
                         <BgImg source={{ uri: makeImgPath(movie.backdrop_path) }} /> 
-                        <BlurView style={{ width:"100%" , height:"100%",position:"absolute" }} intensity={5} >
+                        <BlurView tint={isDark?"dark":"light"} style={StyleSheet.absoluteFill} intensity={5} >
                             <Title>{movie.original_title}</Title>
                         </BlurView>
                     </View>) )}            
