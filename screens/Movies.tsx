@@ -19,6 +19,7 @@ const Loader = styled.View`
     flex:1;
     justify-content:center;
     align-items:center;
+    background-color:${ (props) => props.theme.mainBgColor }
 `
 
 const { height: SCREEN_HEIGHT } =  Dimensions.get("window")  
