@@ -27,9 +27,8 @@ const { height: SCREEN_HEIGHT } =  Dimensions.get("window")
 const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
     const [loading, setLoading] = useState(true);
     const getNowPlaying = async () =>{
-        const response = await fetch(`https://api.themoviedb.org/3/movie/550?api_key=${API_KEY}`)
-        const json = await response.json();
-        console.log(json)
+        const response = await (await fetch(`https://api.themoviedb.org/3/movie/550?api_key=${API_KEY}`)).json();
+        console.log(response)
     }
     useEffect(()=>{
         getNowPlaying();
