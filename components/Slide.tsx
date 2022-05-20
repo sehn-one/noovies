@@ -12,10 +12,10 @@ const BgImg = styled.Image`
     position:absolute;
 `
 
-const Title = styled.Text`
+const Title = styled.Text<{ isDark: boolean }>`
     font-size: 16px;
     font-weight: 600;
-    color: white;
+    color: ${(props) => props.isDark ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.8)"};
 `
 
 const Wrapper = styled.View`
@@ -30,14 +30,15 @@ const Column = styled.View`
     margin-left: 5px;
 
 `
-const Overview = styled.Text`
+const Overview = styled.Text<{ isDark: boolean }>`
     margin-top: 10px;
-    color: rgba(255,255,255,0.6)
+    color: ${(props) => props.isDark ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.8)"};
 `
 
-const Votes = styled(Overview)`
+const Votes = styled(Overview)<{ isDark: boolean }>`
     margin-top: 5px;
     font-size: 12px;
+    color: ${(props) => props.isDark ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.8)"};
 `
 
 interface SlideProps {
@@ -57,13 +58,13 @@ const Slide: React.FC<SlideProps> = ({backdropPath,
     return (
         <View  style={{ flex:1 }}>
             <BgImg source={{ uri: makeImgPath(backdropPath) }} /> 
-            <BlurView tint={isDark? "dark" : "light" } style={StyleSheet.absoluteFill} intensity={10} >                
+            <BlurView tint={isDark? "dark" : "light" } style={StyleSheet.absoluteFill} intensity={40} >                
                 <Wrapper>
                     <Poster path={posterPath}/>
                     <Column>
-                        <Title>{originalTitle}</Title>
-                        {voteAverage > 0 ? <Votes>⭐️ {voteAverage}/10</Votes> : null}
-                        <Overview>{overview.slice(0,80)+"..."}</Overview>
+                        <Title isDark={isDark}>{originalTitle}</Title>
+                        {voteAverage > 0 ? <Votes isDark={isDark}>⭐️ {voteAverage}/10</Votes> : null}
+                        <Overview isDark={isDark}>{overview.slice(0,80)+"..."}</Overview>
                     </Column>
                 </Wrapper>                
             </BlurView>
