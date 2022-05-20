@@ -6,6 +6,7 @@ import Swiper from "react-native-swiper";
 import { ActivityIndicator } from "react-native";
 import { makeImgPath } from "../utils";
 import { BlurView } from "expo-blur"
+import Poster from "../components/Poster";
 
 
 const API_KEY = "d46caed65f5c8ff02793a020a4993177"
@@ -35,11 +36,7 @@ const Title = styled.Text`
     color: white;
 `
 
-const Poster = styled.Image`
-    width: 100px;
-    height: 160px;
-    border-radius: 5px;
-`
+
 
 const Wrapper = styled.View`
     flex-direction:row;
@@ -90,13 +87,11 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
                         <BlurView tint={isDark? "dark" : "light" } style={StyleSheet.absoluteFill} intensity={10} >
                           
                             <Wrapper>
-                                <Poster source={{ uri: makeImgPath(movie.poster_path) }}/>
+                                <Poster path={movie.poster_path}/>
                                 <Column>
                                     <Title>{movie.original_title}</Title>
                                     {movie.vote_average > 0 ? <Votes>⭐️ {movie.vote_average}/10</Votes> : null}
                                     <Overview>{movie.overview.slice(0,80)+"..."}</Overview>
-                                  
-                                    
                                 </Column>
                             </Wrapper>
                            
