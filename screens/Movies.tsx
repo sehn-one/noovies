@@ -55,7 +55,7 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
                 {nowPlaying.map( (movie) =>
                     (<View key={movie.id} >
                         <BgImg source={{ uri: makeImgPath(movie.backdrop_path) }} /> 
-                        <BlurView tint={isDark?"dark":"light"} style={StyleSheet.absoluteFill} intensity={5} >
+                        <BlurView tint={isDark?"dark":"light"} style={StyleSheet.absoluteFill} intensity={20} >
                             <Title>{movie.original_title}</Title>
                         </BlurView>
                     </View>) )}            
